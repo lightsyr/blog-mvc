@@ -23,17 +23,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{Route('post.index')}}">Posts</a>
                     </li>
+                    @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="/sobre-mim">Sobre mim</a>
+                        <a class="nav-link" href="{{Route('login')}}">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contato">Contato</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{Route('post.create')}}">Cadastrar</a>
-                    </li>
+                    @endguest
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{Route('register')}}">Cadastrar-se</a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{Route('post.create')}}">Cadastrar publicações</a>
+                        </li>
+                    @endauth
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{Route('auth.logout')}}">Logout</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
+            @auth
+                <p>Seja bem vindo {{auth()->user()->name}}</p>
+            @endauth
         </div>
     </nav>
     {{$slot}}
